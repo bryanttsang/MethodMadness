@@ -58,7 +58,7 @@ public class BTsangLib {
         int length = message.length();
         String encoded = "";
         int shift = Integer.parseInt(key);
-        int letter = 0;
+        int letter;
         for (int i = 0; i < length; i++)
         {
             if ((alphabet.indexOf(message.charAt(i)) + shift) > 25)
@@ -71,6 +71,7 @@ public class BTsangLib {
             }
             encoded = encoded + alphabet.charAt(letter);
         }
+        return encoded;
     }
 
 
