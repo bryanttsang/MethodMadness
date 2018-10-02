@@ -123,7 +123,7 @@ public class BTsangLib {
     }
 
 
-    public static int leaseCommonMultiple(int num1, int num2, int num3)
+    public static int leastCommonMultiple(int num1, int num2, int num3)
     {
         for (int i = 0; i < ??; i++)
         {
