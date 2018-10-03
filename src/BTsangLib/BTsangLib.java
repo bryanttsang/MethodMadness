@@ -48,7 +48,7 @@ public class BTsangLib {
         {
             return mainStr.substring(0, index - 1);
         }
-        return mainStr.substring(0, index) + mainStr.substring(index + subStr.length(), mainStr.length());
+        return mainStr.substring(0, index) + mainStr.substring(index + subStr.length());
     }
 
 
