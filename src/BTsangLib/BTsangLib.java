@@ -13,9 +13,9 @@ public class BTsangLib {
         }
         else
         {
-            for (int i = 0; i < l; i++)
+            for (int i = l - 1; i >= 0; i--)
             {
-                r = s.charAt(l - 1) + s.substring(0, l - 1);
+                r = r + s.charAt(i);
             }
             return (s.equals(r));
         }
