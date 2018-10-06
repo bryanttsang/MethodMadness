@@ -126,10 +126,57 @@ public class BTsangLib {
 
     public static int leastCommonMultiple(int num1, int num2, int num3)
     {
-        for (int i = 0; i < ??; i++)
+        String factors1 = " ";
+        String factors2 = " ";
+        String factors3 = " ";
+        for (int i1 = 1; i1 <= num1; i1++)
         {
-            i * num1
+            if (num1 % i1 == 0)
+            {
+                String ii1 = Integer.toString(i1);
+                factors1 = factors1 + ii1 + " ";
+            }
+            else {}
         }
-        //biggest value = num1 * num2 * num3
+        for (int i2 = 1; i2 <= num2; i2++)
+        {
+            if (num2 % i2 == 0)
+            {
+                String ii2 = Integer.toString(i2);
+                factors2 = factors2 + ii2 + " ";
+            }
+            else {}
+        }
+        for (int i3 = 1; i3 <= num3; i3++)
+        {
+            if (num3 % i3 == 0)
+            {
+                String ii3 = Integer.toString(i3);
+                factors3 = factors3 + ii3 + " ";
+            }
+            else {}
+        }
+        int l1 = factors1.length();
+        int l2 = factors2.length();
+        int l3 = factors3.length();
+        int long = 0;
+        if (l1 >= l2 && l1 >= l3)
+        {
+            long = l1;
+        }
+        if (l2 >= l1 && l2 >= l3)
+        {
+            long = l2;
+        }
+        else
+        {
+            long = l3;
+        }
+        int index11 = factors1.indexOf(" ");
+        int index12 = factors1.indexOf(factors1.substring(index11 + 1));
+        while (int il < long)
+        {
+            
+        }
     }
 }
