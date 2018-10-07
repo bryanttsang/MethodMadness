@@ -2,7 +2,12 @@ package BTsangLib;
 
 public class BTsangLib {
 
-
+    
+    /**
+     * checks if a string is palindrome
+     * @param s string you want to check
+     * @return true if the string is palindrome, false if it is not
+     */
     public static boolean isPalindrome(String s)
     {
         String r = "";
@@ -22,15 +27,23 @@ public class BTsangLib {
     }
 
 
+    /**
+     * change the format of a date from "mm/dd/yyyy" to "dd - mm - yyyy"
+     * @param d date in the format "mm/dd/yyyy"
+     * @return date in the format "dd - mm - yyyy"
+     */
     public static String dateStr(String d)
     {
-        String mm = d.substring(0, 2);
-        String dd = d.substring(3, 5);
-        String yyyy = d.substring(6, 10);
-        return dd + " - " + mm + " - " + yyyy;
+        return d.substring(3, 5) + " - " + d.substring(0, 2) + " - " + d.substring(6, 10);
     }
 
 
+    /**
+     * remove the first occurrence of a string from another string
+     * @param mainStr the string you want something to remove from
+     * @param subStr what to remove
+     * @return mainStr with the first occurrence of subStr removed
+     */
     public static String cutOut(String mainStr, String subStr)
     {
         int main = mainStr.length();
@@ -52,6 +65,12 @@ public class BTsangLib {
     }
 
 
+    /**
+     * encrypt a uppercase-only string with Caesar cipher
+     * @param message the string to be encrypted
+     * @param key the number of letters to shift right
+     * @return the encrypted string
+     */
     public static String vigCipher(String message, String key)
     {
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -81,6 +100,11 @@ public class BTsangLib {
     }
 
 
+    /**
+     * checks if a number is a Fibonacci
+     * @param n a number you want to check
+     * @return true if it is Fibonacci, false if it is not
+     */
     public static boolean isFibonnaci(int n)
     {
         int addend1 = 0;
@@ -107,14 +131,14 @@ public class BTsangLib {
     }
 
 
+    /**
+     * find the consecutive sum from 0 to n
+     * @param n a number to input
+     * @return the consecutive sum from 0 to n
+     */
     public static int sumUpTo(int n)
     {
-        int sum = 0;
-        for (int i = 0; i <= n; i++)
-        {
-            sum = sum + i;
-        }
-        return sum;
+        return ((n + 1) / 2) * n;
     }
 
 
@@ -124,6 +148,13 @@ public class BTsangLib {
     }
 
 
+    /**
+     * finds the least common multiple of 3 numbers
+     * @param num1 first number
+     * @param num2 second number
+     * @param num3 third number
+     * @return the least common multiple of all 3 nummbers
+     */
     public static int leastCommonMultiple(int num1, int num2, int num3)
     {
         int lcm12 = num1;
@@ -156,4 +187,6 @@ public class BTsangLib {
         }
         return lcm;
     }
+    
+    
 }
