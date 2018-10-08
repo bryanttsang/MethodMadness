@@ -142,9 +142,35 @@ public class BTsangLib {
     }
 
 
+    /**
+     * find the roots of a quadratic equation in the form ax^2 + bx + c
+     * @param a quadratic coefficient
+     * @param b linear coefficient
+     * @param c constant
+     * @return
+     */
     public static String quadSolver(double a, double b, double c)
     {
-
+        double discriminant = b * b - 4 * a * c;
+        if (discriminant == 0)
+        {
+            double x = (-1 * b) / (2 * a);
+            return "x = " + Double.toString(x);
+        }
+        if (discriminant > 0)
+        {
+            double x1 = ((-1 * b) + (Math.sqrt(discriminant))) / (2 * a);
+            double x2 = ((-1 * b) - (Math.sqrt(discriminant))) / (2 * a);
+            return "x = " + Double.toString(x1) + ", " + Double.toString(x2);
+        }
+        if (b == 0)
+        {
+            return "Imaginary roots due to negative discriminant." + " x = " + "±" + Double.toString(((Math.sqrt(Math.abs(discriminant))) / (2 * a))) + "i";
+        }
+        else
+        {
+            return "Imaginary roots due to negative discriminant." + " x = " + Double.toString(((-1 * b) / (2 * a))) + " ± " + Double.toString(((Math.sqrt(Math.abs(discriminant))) / (2 * a))) + "i";
+        }
     }
 
 
