@@ -2,7 +2,7 @@ package BTsangLib;
 
 public class BTsangLib {
 
-    
+
     /**
      * checks if a string is palindrome
      * @param s string you want to check
@@ -94,9 +94,53 @@ public class BTsangLib {
     }
 
 
+    /**
+     * finds how many unique letters 2 or more words of 3 words share
+     * @param word1 the first word
+     * @param word2 the second word
+     * @param word3 the third word
+     * @return the number of unique letters they share
+     */
     public static int stringUnion(String word1, String word2, String word3)
     {
-
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        int union = 0;
+        int index = 0;
+        for (index = 0; index < 26; index++)
+        {
+            String letter = alphabet.substring(index, index + 1);
+            if (word1.contains(letter) && word2.contains(letter))
+            {
+                union += 1;
+                word1 = word1.replaceAll(letter, " ");
+                word2 = word2.replaceAll(letter, " ");
+            }
+            else
+            {
+                union = union;
+            }
+            if (word2.contains(letter) && word3.contains(letter))
+            {
+                union += 1;
+                word2 = word2.replaceAll(letter, " ");
+                word3 = word3.replaceAll(letter, " ");
+            }
+            else
+            {
+                union = union;
+            }
+            if (word3.contains(letter) && word1.contains(letter))
+            {
+                union += 1;
+                word3 = word3.replaceAll(letter, " ");
+                word1 = word1.replaceAll(letter, " ");
+            }
+            else
+            {
+                union = union;
+            }
+        }
+        return union;
     }
 
 
@@ -110,13 +154,13 @@ public class BTsangLib {
         int addend1 = 0;
         int addend2 = 1;
         int sum = 1;
-        while (sum <= 2147483647)
+        if (n == 0)
         {
-            if (n < 0)
-            {
-                return false;
-            }
-            if (sum == n || n == 0)
+            return true;
+        }
+        while (sum <= n)
+        {
+            if (sum == n)
             {
                 return true;
             }
@@ -213,6 +257,6 @@ public class BTsangLib {
         }
         return lcm;
     }
-    
-    
+
+
 }
