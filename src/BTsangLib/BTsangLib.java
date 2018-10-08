@@ -138,7 +138,7 @@ public class BTsangLib {
      */
     public static int sumUpTo(int n)
     {
-        return ((n + 1) / 2) * n;
+        return (n * n + n) / 2;
     }
 
 
