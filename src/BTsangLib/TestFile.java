@@ -4,6 +4,6 @@ public class TestFile {
 
     public static void main(String[] args)
     {
-        System.out.println(BTsangLib.isPalindrome("racecar"));
+        System.out.println(BTsangLib. ( ));
     }
 }
