@@ -1,7 +1,8 @@
 package BTsangLib;
 
-public class BTsangLib {
+import java.util.HashSet;
 
+public class BTsangLib {
 
     /**
      * checks if a string is palindrome
@@ -10,22 +11,13 @@ public class BTsangLib {
      */
     public static boolean isPalindrome(String s)
     {
-        String r = "";
-        int l = s.length();
-        if (l <= 1)
-        {
-            return true;
+        int len = s.length();
+        for (int i = 0; i < len/2; i++) {
+            if (s.charAt(i) != s.charAt(len-1-i))
+                return false;
         }
-        else
-        {
-            for (int i = l - 1; i >= 0; i--)
-            {
-                r = r + s.charAt(i);
-            }
-            return (s.equals(r));
-        }
+        return true;
     }
-
 
     /**
      * change the format of a date from "mm/dd/yyyy" to "dd - mm - yyyy"
@@ -37,7 +29,6 @@ public class BTsangLib {
         return d.substring(3, 5) + " - " + d.substring(0, 2) + " - " + d.substring(6, 10);
     }
 
-
     /**
      * remove the first occurrence of a string from another string
      * @param mainStr the string you want something to remove from
@@ -46,24 +37,8 @@ public class BTsangLib {
      */
     public static String cutOut(String mainStr, String subStr)
     {
-        int main = mainStr.length();
-        int sub = subStr.length();
-        int index = mainStr.indexOf(subStr);
-        if (index == 0)
-        {
-            return mainStr.substring(sub);
-        }
-        if (index < 0)
-        {
-            return mainStr;
-        }
-        if (index + subStr.length() == mainStr.length())
-        {
-            return mainStr.substring(0, index - 1);
-        }
-        return mainStr.substring(0, index) + mainStr.substring(index + subStr.length());
+        return mainStr.replaceFirst(subStr, "");
     }
-
 
     /**
      * encrypt a uppercase-only string with Caesar cipher
@@ -73,26 +48,14 @@ public class BTsangLib {
      */
     public static String vigCipher(String message, String key)
     {
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        int length = message.length();
+        int shift = Integer.parseInt(key) % 26;
         String encoded = "";
-        int shift = Integer.parseInt(key);
-        int letter;
-        for (int i = 0; i < length; i++)
-        {
-            if ((alphabet.indexOf(message.charAt(i)) + shift) > 25)
-            {
-                letter = alphabet.indexOf(message.charAt(i)) - 26 + shift;
-            }
-            else
-            {
-                letter = alphabet.indexOf(message.charAt(i)) + shift;
-            }
-            encoded = encoded + alphabet.charAt(letter);
+        for (int i = 0; i < message.length(); i++) {
+            int c = message.charAt(i) + shift;
+            encoded += (char)(c > 'Z' ? c-26 : c);
         }
         return encoded;
     }
-
 
     /**
      * finds how many unique letters 2 or more words of 3 words share
@@ -103,46 +66,31 @@ public class BTsangLib {
      */
     public static int stringUnion(String word1, String word2, String word3)
     {
-        String alphabet = "abcdefghijklmnopqrstuvwxyz";
-        int union = 0;
-        int index = 0;
-        for (index = 0; index < 26; index++)
-        {
-            String letter = alphabet.substring(index, index + 1);
-            if (word1.contains(letter) && word2.contains(letter))
-            {
-                union += 1;
-                word1 = word1.replaceAll(letter, " ");
-                word2 = word2.replaceAll(letter, " ");
-            }
-            else
-            {
-                union = union;
-            }
-            if (word2.contains(letter) && word3.contains(letter))
-            {
-                union += 1;
-                word2 = word2.replaceAll(letter, " ");
-                word3 = word3.replaceAll(letter, " ");
-            }
-            else
-            {
-                union = union;
-            }
-            if (word3.contains(letter) && word1.contains(letter))
-            {
-                union += 1;
-                word3 = word3.replaceAll(letter, " ");
-                word1 = word1.replaceAll(letter, " ");
-            }
-            else
-            {
-                union = union;
+        int[] occur = new int[26];
+        HashSet<Character> set = new HashSet<>();
+        int unique = 0;
+
+        for (char c : word1.toCharArray()) {
+            if (set.add(c))
+                occur[c - 'a']++;
+        }
+        set.clear();
+
+        for (char c : word2.toCharArray()) {
+            if (set.add(c)) {
+                if (++occur[c - 'a'] == 2)
+                    unique++;
             }
         }
-        return union;
-    }
+        set.clear();
 
+        for (char c : word3.toCharArray()) {
+            if (set.add(c) && occur[c - 'a'] == 1)
+                unique++;
+        }
+
+        return unique;
+    }
 
     /**
      * checks if a number is a Fibonacci
@@ -151,29 +99,8 @@ public class BTsangLib {
      */
     public static boolean isFibonnaci(int n)
     {
-        int addend1 = 0;
-        int addend2 = 1;
-        int sum = 1;
-        if (n == 0)
-        {
-            return true;
-        }
-        while (sum <= n)
-        {
-            if (sum == n)
-            {
-                return true;
-            }
-            else
-            {
-                addend1 = addend2;
-                addend2 = sum;
-                sum = addend1 + addend2;
-            }
-        }
-        return false;
+        return (Math.sqrt(5 * n*n + 4) * (int)Math.sqrt(5 * n*n + 4) == 5 * n*n + 4 || Math.sqrt(5 * n*n - 4) * (int)Math.sqrt(5 * n*n - 4) == 5 * n*n - 4);
     }
-
 
     /**
      * find the consecutive sum from 0 to n
@@ -185,78 +112,42 @@ public class BTsangLib {
         return (n * n + n) / 2;
     }
 
-
     /**
      * find the roots of a quadratic equation in the form ax^2 + bx + c
      * @param a quadratic coefficient
      * @param b linear coefficient
      * @param c constant
-     * @return
+     * @return roots
      */
     public static String quadSolver(double a, double b, double c)
     {
-        double discriminant = b * b - 4 * a * c;
+        double discriminant = b*b - 4*a*c;
         if (discriminant == 0)
-        {
-            double x = (-1 * b) / (2 * a);
-            return "x = " + Double.toString(x);
-        }
+            return "x = " + ((-1 * b) / (2 * a));
         if (discriminant > 0)
-        {
-            double x1 = ((-1 * b) + (Math.sqrt(discriminant))) / (2 * a);
-            double x2 = ((-1 * b) - (Math.sqrt(discriminant))) / (2 * a);
-            return "x = " + Double.toString(x1) + ", " + Double.toString(x2);
-        }
+            return "x = " + (((-1 * b) + (Math.sqrt(discriminant))) / (2 * a)) + ", " + (((-1 * b) - (Math.sqrt(discriminant))) / (2 * a));
         if (b == 0)
-        {
-            return "Imaginary roots due to negative discriminant." + " x = " + "±" + Double.toString(((Math.sqrt(Math.abs(discriminant))) / (2 * a))) + "i";
-        }
-        else
-        {
-            return "Imaginary roots due to negative discriminant." + " x = " + Double.toString(((-1 * b) / (2 * a))) + " ± " + Double.toString(((Math.sqrt(Math.abs(discriminant))) / (2 * a))) + "i";
-        }
+            return "x = ± " + (Math.sqrt(Math.abs(discriminant)) / (2 * a)) + "i";
+        return "x = " + ((-1 * b) / (2 * a)) + " ± " + (Math.sqrt(Math.abs(discriminant)) / (2 * a)) + "i";
     }
-
 
     /**
      * finds the least common multiple of 3 numbers
      * @param num1 first number
      * @param num2 second number
      * @param num3 third number
-     * @return the least common multiple of all 3 nummbers
+     * @return the least common multiple of all 3 numbers
      */
     public static int leastCommonMultiple(int num1, int num2, int num3)
     {
-        int lcm12 = num1;
-        int i = lcm12;
-        for (i = lcm12; i <= (num1 * num2); i++)
-        {
-            if (i % num1 == 0 && i % num2 == 0)
-            {
-                lcm12 = i;
-                i = num1 * num2 + 1;
-            }
-            else
-            {
-                i = i;
-            }
+        int max = Math.max(Math.max(num1, num2), num3);
+        int m = max;
+        while (Integer.MAX_VALUE - m > max) {
+            if (m % num1 == 0 && m % num2 == 0 && m % num3 == 0)
+                return m;
+            m += max;
         }
-        int lcm = lcm12;
-        int ii = lcm;
-        for (ii = lcm; ii <= lcm12 * num3; ii++)
-        {
-            if (ii % lcm12 == 0 && ii % num3 == 0)
-            {
-                lcm = ii;
-                ii = lcm12 * num3 + 1;
-            }
-            else
-            {
-                ii = ii;
-            }
-        }
-        return lcm;
+        return -1;
     }
-
 
 }
